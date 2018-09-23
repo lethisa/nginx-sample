@@ -1,0 +1,20 @@
+events {}
+
+http {
+
+	upstream php_servers {
+		server 192.168.137.167:10001;
+		server 192.168.137.167:10002;
+		server 192.168.137.167:10003;
+	}
+	
+	server {
+
+		listen 8000;
+
+		location / {
+		#	proxy_pass 'http://192.168.137.167:10001/';
+			proxy_pass http://php_servers;
+		}
+	}
+}
