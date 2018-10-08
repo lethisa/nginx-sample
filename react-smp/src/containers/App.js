@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import classes from './App.module.css'
 // import './App.css'
-import Person from './Person/Person'
+import Person from '../components/Persons/Person/Person'
 // import Radium, { StyleRoot } from 'radium'
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
   // state available on components + class
@@ -86,23 +89,29 @@ class App extends Component {
     // }
 
     let persons = null
-    let btnClass = ''
+    // let btnClass = ''
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}
+          />
+          {/* {this.state.persons.map((person, index) => {
             return (
-              <Person
-                delete={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                change={event => this.nameChangedHandler(event, person.id)}
-              />
+              <ErrorBoundary>
+                <Person
+                  delete={() => this.deletePersonHandler(index)}
+                  name={person.name}
+                  age={person.age}
+                  key={person.id}
+                  change={event => this.nameChangedHandler(event, person.id)}
+                />
+              </ErrorBoundary>
             )
-          })}
-
+          })} */}
           {/* <Person
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
@@ -124,7 +133,7 @@ class App extends Component {
         </div>
       )
 
-      btnClass = classes.Red
+      // btnClass = classes.Red
 
       // style.backgroundColor = 'blue'
       // style[':hover'] = {
@@ -134,19 +143,25 @@ class App extends Component {
     }
 
     // let classes = ['red', 'bold'].join(' ')
-    const assigned = []
-    if (this.state.persons.length <= 2) {
-      assigned.push(classes.red) // class will be red
-    }
-    if (this.state.persons.length <= 1) {
-      assigned.push(classes.bold) // class will be red + bold
-    }
+    // const assigned = []
+    // if (this.state.persons.length <= 2) {
+    //   assigned.push(classes.red) // class will be red
+    // }
+    // if (this.state.persons.length <= 1) {
+    //   assigned.push(classes.bold) // class will be red + bold
+    // }
 
     return (
       // <StyleRoot>
       // <div className="App">
       <div className={classes.App}>
-        <h1>Hi, I'm React App</h1>
+        <Cockpit
+          appTitle={this.props.title}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonHandler}
+        />
+        {/* <h1>Hi, I'm React App</h1>
         <p className={assigned.join('')}>This is really working</p>
 
         <button
@@ -156,8 +171,7 @@ class App extends Component {
           onClick={this.togglePersonHandler}
         >
           Toggle Person
-        </button>
-
+        </button> */}
         {/* {this.state.showPersons === true ? (
           <div>
             <Person
@@ -180,7 +194,6 @@ class App extends Component {
             />
           </div>
         ) : null} */}
-
         {persons}
       </div>
       // </StyleRoot>
