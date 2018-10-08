@@ -1,5 +1,6 @@
 import React from 'react'
-import './Person.css'
+// import './Person.css'
+import classes from './Person.module.css'
 // import Radium from 'radium'
 
 const person = props => {
@@ -11,7 +12,8 @@ const person = props => {
 
   return (
     // <div className="Person" style={style}>
-    <div className="Person">
+    // <div className="Person">
+    <div className={classes.Person}>
       {/* <p onClick={props.click}> */}
       <p onClick={props.delete}>
         I'm a {props.name} and I am {props.age} years old

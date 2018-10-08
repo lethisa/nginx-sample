@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import './App.css'
+import classes from './App.module.css'
+// import './App.css'
 import Person from './Person/Person'
 // import Radium, { StyleRoot } from 'radium'
 
@@ -71,20 +72,21 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'red',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      color: 'white'
-      // ':hover': {
-      //   backgroundColor: 'lightgreen',
-      //   color: 'black'
-      // }
-    }
+    // const style = {
+    //   backgroundColor: 'red',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   color: 'white'
+    //   // ':hover': {
+    //   //   backgroundColor: 'lightgreen',
+    //   //   color: 'black'
+    //   // }
+    // }
 
     let persons = null
+    let btnClass = ''
 
     if (this.state.showPersons) {
       persons = (
@@ -122,31 +124,35 @@ class App extends Component {
         </div>
       )
 
-      style.backgroundColor = 'blue'
-      style[':hover'] = {
-        backgroundColor: 'pink',
-        color: 'black'
-      }
+      btnClass = classes.Red
+
+      // style.backgroundColor = 'blue'
+      // style[':hover'] = {
+      //   backgroundColor: 'pink',
+      //   color: 'black'
+      // }
     }
 
     // let classes = ['red', 'bold'].join(' ')
-    const classes = []
+    const assigned = []
     if (this.state.persons.length <= 2) {
-      classes.push('red') // class will be red
+      assigned.push(classes.red) // class will be red
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold') // class will be red + bold
+      assigned.push(classes.bold) // class will be red + bold
     }
 
     return (
       // <StyleRoot>
-      <div className="App">
+      // <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm React App</h1>
-        <p className={classes.join('')}>This is really working</p>
+        <p className={assigned.join('')}>This is really working</p>
 
         <button
-          style={style}
+          // style={style} // inline properti
           // onClick={() => this.switchNameHandler('name-change-click-2')}
+          className={btnClass}
           onClick={this.togglePersonHandler}
         >
           Toggle Person
